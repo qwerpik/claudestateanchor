@@ -144,7 +144,7 @@ Full hook contracts and file layout: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md
 
 | Path | Status |
 |---|---|
-| 29 unit & contract tests (`npm test`) | ✅ green |
+| 30 unit & contract tests (`npm test`) | ✅ green |
 | Hook execution in a real `claude` CLI session (`SessionStart` on `--resume`, snapshot consumed & archived) | ✅ verified live 2026-09-19 |
 | Resume-path rehydration reaching the model (codephrase experiment) | ⚠️ script shipped, run it on your machine — see `scripts/e2e-resume.mjs` |
 | Compact path end-to-end (real auto-compact → model uses the `<state-anchor>` block) | ⚠️ pending — tracked in [#1](https://github.com/qwerpik/claudestateanchor/issues/1); the author's environment (local API proxy with a 32k-token limit) cannot run real sessions |

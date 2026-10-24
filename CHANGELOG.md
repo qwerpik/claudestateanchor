@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+- **Fix:** scoped rules now apply to `NotebookEdit`. The `PreToolUse` hook only
+  read `tool_input.file_path`, but notebook edits pass `notebook_path`, so
+  rules matching `*.ipynb` never reached the model.
+
 ## 0.2.0 — 2026-09-19
 
 - **PostCompact hook**: persists Claude Code's own `compact_summary` per

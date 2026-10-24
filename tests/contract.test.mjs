@@ -172,6 +172,23 @@ test("pretooluse injects matching rules once per session, then goes quiet", () =
   );
 });
 
+test("pretooluse matches NotebookEdit targets by notebook_path", () => {
+  const proj = tmpProject("contract-pretooluse-notebook");
+  write(
+    `${proj}/.claude/anchor-rules/notebooks.md`,
+    "---\npaths:\n  - \"**/*.ipynb\"\n---\nClear outputs before committing notebooks.",
+  );
+  const out = JSON.parse(
+    run("pretooluse.mjs", {
+      session_id: "sess-nb",
+      cwd: proj,
+      tool_name: "NotebookEdit",
+      tool_input: { notebook_path: `${proj}/analysis/explore.ipynb`, new_source: "x = 1" },
+    }),
+  );
+  assert.match(out.hookSpecificOutput.additionalContext, /state-anchor rule: notebooks/);
+});
+
 test("state dir is created on demand and stays out of the way", () => {
   const proj = tmpProject("contract-statedir");
   run("precompact.mjs", { session_id: "sess-9", transcript_path: "", cwd: proj });
