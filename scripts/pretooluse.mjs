@@ -17,7 +17,8 @@ const input = await readStdinJson();
 if (!input) process.exit(0);
 
 try {
-  const filePath = input.tool_input?.file_path;
+  // NotebookEdit names its target notebook_path, not file_path.
+  const filePath = input.tool_input?.file_path ?? input.tool_input?.notebook_path;
   if (typeof filePath !== "string" || !filePath) process.exit(0);
   const cwd = typeof input.cwd === "string" && input.cwd ? input.cwd : process.cwd();
 
